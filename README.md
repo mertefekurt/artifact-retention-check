@@ -6,12 +6,12 @@
 
 Check build artifact retention policies for expiry, owner, and sensitive output risks. It solves review drift by turning plain-text plans into deterministic CI-friendly findings.
 
-## Input Contract 44
+## Input Contract
 
 Accepts artifact retention policy. The reader supports plain text, JSON, JSONL, and CSV so the
 tool can fit into scripts, CI jobs, and review exports.
 
-## CLI Walkthrough 44
+## CLI Walkthrough
 
 ```bash
 python -m pip install -e ".[dev]"
@@ -20,7 +20,7 @@ artifact-retention-check examples/sample.txt --json --fail-on medium
 python -m artifact_retention_check --help
 ```
 
-## Rule Surface 44
+## Rule Surface
 
 | Rule | Severity | Meaning |
 |---|---:|---|
@@ -28,7 +28,7 @@ python -m artifact_retention_check --help
 | `unknown-owner` | medium | artifact owner missing |
 | `secrets-possible` | low | secrets may be in artifacts |
 
-## Validation Notes 44
+## Validation Notes
 
 ```bash
 ruff check .
