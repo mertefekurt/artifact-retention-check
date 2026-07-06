@@ -1,41 +1,34 @@
-<img src="assets/readme-cover.svg" alt="Artifact Retention Check cover" width="100%" />
-
 # Artifact Retention Check
 
-Check build artifact retention policies for expiry, owner, and sensitive output risks.
+Check build artifact retention policies for expiry, owner, and sensitive output risks. The repository is intentionally plain: a small command, a visible rule surface, and enough examples to make the behavior inspectable.
 
-![stack](https://img.shields.io/badge/stack-Python-dc2626?style=flat-square) ![python](https://img.shields.io/badge/python-3.11-7c3aed?style=flat-square) ![license](https://img.shields.io/badge/license-MIT-0891b2?style=flat-square) ![ci](https://img.shields.io/badge/ci-GitHub%20Actions-b45309?style=flat-square)
+<img src="assets/readme-cover.svg" alt="Artifact Retention Check cover" width="100%" />
 
-## Workflow
+## Review checklist
 
-1. Collect the review notes or exported records.
-2. Run `artifact-retention-check` against the file.
-3. Read the findings in Markdown, or switch to JSON for automation.
-4. Fail CI only at the severity level you care about.
+- [ ] artifact retention is unbounded (`retention-forever`, high)
+- [ ] artifact owner missing (`unknown-owner`, medium)
+- [ ] secrets may be in artifacts (`secrets-possible`, low)
 
-## Checks
-
-| Rule | Severity | What it catches |
-| --- | --- | --- |
-| `retention-forever` | high | artifact retention is unbounded |
-| `unknown-owner` | medium | artifact owner missing |
-| `secrets-possible` | low | secrets may be in artifacts |
-
-## Command line
+## Command path
 
 ```bash
+git clone https://github.com/mertefekurt/artifact-retention-check.git
+cd artifact-retention-check
+python -m venv .venv
+source .venv/bin/activate
 python -m pip install -e ".[dev]"
 artifact-retention-check examples/sample.txt
-artifact-retention-check examples/sample.txt --json --fail-on medium
+artifact-retention-check examples/sample.txt --json
 ```
 
-## Sample risky input
+## Fixture worth keeping
 
 ```text
 artifact logs retention forever owner unknown secrets possible
 ```
 
-## Project shape
+## Files I look at first
 
 ```text
 .github/        CI workflow
